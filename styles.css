@@ -1,0 +1,121 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.root {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  margin: 3rem 0;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: max-content;
+    width: min-content;
+    border: 1px solid grey;
+  }
+}
+
+#grid {
+  width: 40rem;
+  height: 40rem;
+  margin: 0 auto;
+  display: grid;
+
+  .row {
+    display: grid;
+
+    &:nth-child(even) {
+      .cell:nth-child(odd) {
+        background-color: #f0f0f0;
+      }
+    }
+
+    &:nth-child(odd) {
+      .cell:nth-child(even) {
+        background-color: #f0f0f0;
+      }
+    }
+
+    .cell {
+      cursor: crosshair;
+    }
+  }
+}
+
+#palette-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-self: end;
+  height: 35rem;
+
+  .color-swatch {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+  }
+}
+
+.tool-cell {
+  cursor: grab;
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+
+  &:active {
+    cursor: grabbing;
+    border: 0.2rem solid blue;
+  }
+}
+
+footer {
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .root {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 3rem;
+    margin: 2rem auto;
+  }
+
+  .left-container {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  #grid {
+    width: 90vw;
+    height: 45vh;
+  }
+
+  #palette-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-self: start;
+    height: 4rem;
+
+    .color-swatch,
+    .tool-cell {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
