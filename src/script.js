@@ -45,12 +45,14 @@ function PixelArt(element, rows, cols) {
         )
       ) {
         selectedTool = undefined;
+        element.style.cursor = 'default';
         element.removeEventListener('mouseover', handleTool);
         return;
       }
 
       if (!selectedTool && e.target.style.backgroundColor === selectedColor) {
         selectedColor = undefined;
+        element.style.cursor = 'default';
         element.removeEventListener('mouseover', createArt);
         return;
       }
@@ -151,6 +153,15 @@ function handleToolSelection(e) {
     selectedColor = null;
     const tool = _selectedTool.getAttribute('data-name');
     selectedTool = tool;
+
+    switch (tool) {
+      case 'eraser':
+        canvasEl.style.cursor = 'no-drop';
+        break;
+
+      default:
+        return;
+    }
   }
 }
 
@@ -166,14 +177,15 @@ function handleColorSelectionFromSwatch(e) {
 
 function removeListenerFromCanvas() {
   selectedTool = null;
+  canvasEl.style.cursor = 'crosshair';
   canvasEl.removeEventListener('mouseover', createArt);
 }
 
 (function init() {
   canvasEl = document.querySelector('#grid');
   const density = Number(window.prompt('Enter value for pixel density: ', 80));
-
   new PixelArt(canvasEl, density, density);
+  
   createColorPalette('#palette-container', 25);
   createToolbar('#toolbar');
 })();

@@ -15,7 +15,7 @@ body {
 .root {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 .left-container {
@@ -51,10 +51,6 @@ body {
       .cell:nth-child(even) {
         background-color: #f0f0f0;
       }
-    }
-
-    .cell {
-      cursor: crosshair;
     }
   }
 }
